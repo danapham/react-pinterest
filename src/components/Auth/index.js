@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
