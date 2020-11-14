@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router, Route, Switch,
-} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from '../views/Home';
 import BoardForm from '../views/BoardForm';
 import Boards from '../views/Boards';
@@ -13,7 +11,6 @@ import NotFound from '../views/NotFound';
 
 export default function Routes(props) {
   return (
-      <Router>
           <Switch>
             <Route exact path='/' component={() => <Home authed={props.authed} name='Dana' />} />
             <Route exact path='/boardform' component={() => <BoardForm authed={props.authed} />} />
@@ -24,6 +21,5 @@ export default function Routes(props) {
             <Route exact path='/singleboard' component={() => <SingleBoard authed={props.authed} />} />
             <Route exact path='/notfound' component={() => <NotFound />} />
           </Switch>
-        </Router>
   );
 }
