@@ -1,9 +1,13 @@
 import React from 'react';
-import getBoardPins from '../helpers/data/boardPinsData';
+import boardPinsData from '../helpers/data/boardPinsData';
+import BoardForm from '../components/Forms/BoardForm';
+import boardsData from '../helpers/data/boardsData';
+import Pin from '../components/Pin';
 
 export default class SingleBoard extends React.Component {
   state = {
     pins: [],
+    board: [],
   }
 
   // 1. Make a call to the API that returns the pins associated with this board
@@ -11,20 +15,41 @@ export default class SingleBoard extends React.Component {
   // 3. Render pins to dom
 
   componentDidMount() {
-    this.getBoardPins();
+    const boardFirebaseKey = this.props.match.params.id;
+    this.getBoardPins(boardFirebaseKey);
+    this.getBoard(boardFirebaseKey);
   }
 
-  getBoardPins = () => {
-    const boardFirebaseKey = this.props.match.params.id;
-    getBoardPins(boardFirebaseKey).then((res) => this.setState({
-      pins: res,
+  getBoardPins = (fbKey) => {
+    boardPinsData.getBoardPins(fbKey).then((res) => {
+      const boardPins = [];
+      res.forEach((pin) => {
+        boardPins.push(boardPinsData.getPin(pin.pinId));
+      });
+      return Promise.all([...boardPins]);
+    });
+  }
+
+  setPins = () => this.setState({
+    pins: this.getBoardPins(),
+  });
+
+  getBoard = (fbKey) => {
+    boardsData.getSingleBoard(fbKey).then((res) => this.setState({
+      board: res,
     }));
+  }
+
+  renderPins = () => {
+    this.state.pins.map((pin) => <Pin pin={pin} />);
   }
 
   render() {
     return (
       <div>
+        <BoardForm board={this.state.board} onUpdate={this.getBoardInfo} />
         <h1>Single Board</h1>
+        {this.renderPins}
       </div>
     );
   }

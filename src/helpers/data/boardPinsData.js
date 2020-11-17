@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
 
 const baseUrl = 'https://pinterest-77df5.firebaseio.com/';
@@ -15,4 +16,10 @@ const getBoardPins = (boardId) => new Promise((resolve, reject) => {
   }).catch((err) => reject(err));
 });
 
-export default getBoardPins;
+const getPin = (pinId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins/${pinId}.json`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export default { getBoardPins, getPin };
