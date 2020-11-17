@@ -1,6 +1,8 @@
 import React from 'react';
-import getAllBoards from '../helpers/data/boardsData';
+import boardsData from '../helpers/data/boardsData';
 import Board from '../components/Board';
+import BoardForm from '../components/Forms/BoardForm';
+import getUid from '../helpers/data/authData';
 
 export default class Boards extends React.Component {
   state = {
@@ -11,14 +13,20 @@ export default class Boards extends React.Component {
     this.getBoards();
   }
 
-  getBoards = () => getAllBoards().then((res) => this.setState({
-    boards: res,
-  }))
+  getBoards = () => {
+    const currentUserId = getUid();
+    boardsData.getAllBoards(currentUserId).then((res) => this.setState({
+      boards: res,
+    }));
+  }
 
   render() {
     const { boards } = this.state;
     return (
-      boards.map((board) => <Board key={board.firebaseKey} board={board} />)
+      <>
+      <BoardForm onUpdate={this.getBoards} />
+      {boards.map((board) => <Board key={board.firebaseKey} board={board} />)}
+      </>
     );
   }
 }

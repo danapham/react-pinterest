@@ -10,8 +10,9 @@ const getBoardPins = (boardId) => new Promise((resolve, reject) => {
       Object.keys(pins).forEach((pinKey) => {
         boardPins.push(pins[pinKey]);
       });
+      resolve(boardPins);
     }
-  });
+  }).catch((err) => reject(err));
 });
 
 export default getBoardPins;
