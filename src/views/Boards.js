@@ -1,5 +1,5 @@
 import React from 'react';
-import boardsData from '../helpers/data/boardsData';
+import getAllBoards from '../helpers/data/boardsData';
 import Board from '../components/Board';
 
 export default class Boards extends React.Component {
@@ -11,7 +11,7 @@ export default class Boards extends React.Component {
     this.getBoards();
   }
 
-  getBoards = () => boardsData.getAllBoards().then((res) => this.setState({
+  getBoards = () => getAllBoards().then((res) => this.setState({
     boards: res,
   }))
 

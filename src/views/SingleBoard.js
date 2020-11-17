@@ -1,5 +1,5 @@
 import React from 'react';
-import boardPinsData from '../helpers/data/boardPinsData';
+import getBoardPins from '../helpers/data/boardPinsData';
 
 export default class SingleBoard extends React.Component {
   state = {
@@ -16,7 +16,7 @@ export default class SingleBoard extends React.Component {
 
   getBoardPins = () => {
     const boardFirebaseKey = this.props.match.params.id;
-    boardPinsData.getBoardPins(boardFirebaseKey).then((res) => this.setState({
+    getBoardPins(boardFirebaseKey).then((res) => this.setState({
       pins: res,
     }));
   }
