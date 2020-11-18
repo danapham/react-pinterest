@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Link } from 'react-router-dom';
+import SearchInput from '../SearchInput';
 
 export default class MyNavbar extends Component {
   state = { }
@@ -31,12 +32,15 @@ export default class MyNavbar extends Component {
               </li>
             </ul>
             <div className="form-inline my-2 my-lg-0">
+            <SearchInput />
               {authed && (
                 <button className="nav-link btn btn-danger" onClick={this.logMeOut}>Logout</button>
               )}
             </div>
           </div>
         </nav>
+        {this.props.children}
+        <footer>This is a footer</footer>
       </div>
     );
   }

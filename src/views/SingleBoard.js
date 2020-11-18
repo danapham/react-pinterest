@@ -3,6 +3,7 @@ import boardPinsData from '../helpers/data/boardPinsData';
 import BoardForm from '../components/Forms/BoardForm';
 import boardsData from '../helpers/data/boardsData';
 import Pin from '../components/Pin';
+import AppModal from '../components/AppModal';
 
 export default class SingleBoard extends React.Component {
   state = {
@@ -47,8 +48,10 @@ export default class SingleBoard extends React.Component {
   render() {
     return (
       <div>
-        <BoardForm board={this.state.board} onUpdate={this.getBoardInfo} />
         <h1>Single Board</h1>
+        <AppModal title={'Update Board'} buttonLabel={'Update Board'}>
+        { Object.keys(this.state.board).length && <BoardForm board={this.state.board} onUpdate={this.getBoardInfo} />}
+        </AppModal>
         {this.renderPins}
       </div>
     );

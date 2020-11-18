@@ -8,6 +8,7 @@ import PinForm from '../views/PinForm';
 import Pins from '../views/Pins';
 import SingleBoard from '../views/SingleBoard';
 import NotFound from '../views/NotFound';
+import SearchResults from '../views/SearchResults';
 
 export default function Routes({ authed }) {
   return (
@@ -20,6 +21,7 @@ export default function Routes({ authed }) {
             <Route exact path='/pins' component={() => <Pins authed={authed} />} />
             <Route exact path='/boards/:id' component={(props) => <SingleBoard authed={authed} {...props} />} />
             <Route exact path='/notfound' component={() => <NotFound />} />
+            <Route exact path='/search/:term/:type' component={(props) => <SearchResults {...props} />} />
           </Switch>
   );
 }

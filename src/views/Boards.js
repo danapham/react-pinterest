@@ -3,6 +3,7 @@ import boardsData from '../helpers/data/boardsData';
 import Board from '../components/Board';
 import BoardForm from '../components/Forms/BoardForm';
 import getUid from '../helpers/data/authData';
+import AppModal from '../components/AppModal';
 
 export default class Boards extends React.Component {
   state = {
@@ -24,7 +25,7 @@ export default class Boards extends React.Component {
     const { boards } = this.state;
     return (
       <>
-      <BoardForm onUpdate={this.getBoards} />
+      <AppModal title={'Create Board'} buttonLabel={'Create Board'}><BoardForm onUpdate={this.getBoards} /></AppModal>
       {boards.map((board) => <Board key={board.firebaseKey} board={board} />)}
       </>
     );
