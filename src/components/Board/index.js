@@ -10,7 +10,7 @@ class Boards extends Component {
       <img src={board.imageUrl} className="card-img-top" alt={`image of ${board.name}`} ></img>
       <div className="card-body">
         <p className="card-text">{board.name}</p>
-        <Link className='btn btn-primary' to={`/boards/${board.firebaseKey}`}>View Pins</Link>
+        <Link className='btn btn-primary' to={`/boards/${board.firebaseKey}`}>View Board</Link>
       </div>
     </div>
     );

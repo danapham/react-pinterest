@@ -17,8 +17,8 @@ export default class SingleBoard extends React.Component {
 
   componentDidMount() {
     const boardFirebaseKey = this.props.match.params.id;
-    this.getBoardPins(boardFirebaseKey);
     this.getBoard(boardFirebaseKey);
+    this.setPins(boardFirebaseKey);
   }
 
   getBoardPins = (fbKey) => {
@@ -31,9 +31,11 @@ export default class SingleBoard extends React.Component {
     });
   }
 
-  setPins = () => this.setState({
-    pins: this.getBoardPins(),
-  });
+  setPins = (fbKey) => {
+    boardPinsData.getBoardPins(fbKey).then((res) => this.setState({
+      pins: res,
+    }));
+  }
 
   getBoard = (fbKey) => {
     boardsData.getSingleBoard(fbKey).then((res) => this.setState({
@@ -41,18 +43,18 @@ export default class SingleBoard extends React.Component {
     }));
   }
 
-  renderPins = () => {
-    this.state.pins.map((pin) => <Pin pin={pin} />);
-  }
+  renderPins = () => (
+    this.state.pins.map((pin) => <Pin pin={pin} />)
+  )
 
   render() {
     return (
       <div>
         <h1>Single Board</h1>
         <AppModal title={'Update Board'} buttonLabel={'Update Board'}>
-        { Object.keys(this.state.board).length && <BoardForm board={this.state.board} onUpdate={this.getBoardInfo} />}
+        {Object.keys(this.state.board).length && <BoardForm board={this.state.board} onUpdate={this.getBoardInfo} />}
         </AppModal>
-        {this.renderPins}
+        {this.renderPins()}
       </div>
     );
   }
