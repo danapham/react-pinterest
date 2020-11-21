@@ -32,8 +32,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <MyNavbar authed={authed} />
+          <MyNavbar authed={authed}>
           <Routes authed={authed} />
+          </MyNavbar>
         </Router>
       </div>
     );
