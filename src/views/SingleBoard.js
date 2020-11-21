@@ -44,7 +44,7 @@ export default class SingleBoard extends React.Component {
   }
 
   renderPins = () => (
-    this.state.pins.map((pin) => <Pin pin={pin} />)
+    this.state.pins.map((pin) => <Pin key={pin.pinId} pin={pin} />)
   )
 
   render() {
