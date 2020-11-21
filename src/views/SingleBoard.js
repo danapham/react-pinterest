@@ -50,9 +50,9 @@ export default class SingleBoard extends React.Component {
   render() {
     return (
       <div>
-        <h1>Single Board</h1>
+        <h1>{this.state.board.name}</h1>
         <AppModal title={'Update Board'} buttonLabel={'Update Board'}>
-        {Object.keys(this.state.board).length && <BoardForm board={this.state.board} onUpdate={this.getBoardInfo} />}
+        {Object.keys(this.state.board).length && <BoardForm board={this.state.board} onUpdate={this.getBoard} />}
         </AppModal>
         {this.renderPins()}
       </div>
