@@ -48,7 +48,7 @@ export default class BoardForm extends Component {
           this.props.onUpdate();
         });
     } else {
-      boardsData.updateBoard(this.state)
+      boardsData.updateBoard(this.state.firebaseKey, this.state)
         .then(() => {
           this.props.onUpdate(this.props.board.firebaseKey);
         });
