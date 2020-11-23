@@ -10,6 +10,15 @@ const getPublicPins = () => new Promise((resolve, reject) => {
   }).catch((err) => reject(err));
 });
 
-// const getUserPins = () =>
+const getUserPins = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json?orderBy="userId"&equalTo="${uid}"`).then((res) => {
+    const pinsObj = res.data;
+    const userPins = [];
+    Object.keys(pinsObj).forEach((key) => {
+      userPins.push(pinsObj[key]);
+    });
+    resolve(userPins);
+  });
+});
 
-export default { getPublicPins };
+export default { getPublicPins, getUserPins };
