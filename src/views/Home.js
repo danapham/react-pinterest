@@ -1,22 +1,39 @@
-import React from 'react';
-import BoardContainer from '../components/BoardContainer';
+/* eslint-disable consistent-return */
+import React, { Component } from 'react';
 import Auth from '../components/Auth/index';
+import pinData from '../helpers/data/pinData';
+import Pin from '../components/Pin';
 
-export default function Home(props) {
-  const loadComponent = () => {
-    let component = '';
-    if (props.authed) {
-      component = <BoardContainer />;
-    } else {
-      component = <Auth />;
-    }
-    return component;
-  };
+export default class Home extends Component {
+  state = {
+    pins: [],
+  }
 
-  return (
-    <div>
-      <h1>Home: {props.name}</h1>
-      {loadComponent()}
-    </div>
-  );
+  componentDidMount() {
+    this.getPins();
+  }
+
+  getPins = () => {
+    pinData.getPublicPins().then((res) => this.setState({
+      pins: res,
+    }));
+  }
+
+  render() {
+    const loadComponent = () => {
+      let component = '';
+      if (this.props.authed) {
+        component = this.state.pins.map((pin) => (<Pin pin={pin} />));
+      } else {
+        component = <Auth />;
+      }
+      return component;
+    };
+    return (
+      <div>
+        <h1>Welcome to Pinterest!</h1>
+        {loadComponent()}
+      </div>
+    );
+  }
 }

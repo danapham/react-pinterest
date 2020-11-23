@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 
 export default class Pin extends Component {
-  state = { }
-
   render() {
     const { pin } = this.props;
     return (

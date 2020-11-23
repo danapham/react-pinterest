@@ -25,6 +25,7 @@ export default class Boards extends React.Component {
     const { boards } = this.state;
     return (
       <>
+      <h1>My Boards</h1>
       <AppModal title={'Create Board'} buttonLabel={'Create Board'}><BoardForm onUpdate={this.getBoards} /></AppModal>
       {boards.map((board) => <Board key={board.firebaseKey} board={board} />)}
       </>
