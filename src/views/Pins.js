@@ -12,7 +12,7 @@ export default class Pins extends Component {
   }
 
   getPins = () => {
-    pinData.getPins().then((res) => this.setState({
+    pinData.getPublicPins().then((res) => this.setState({
       pins: res,
     }));
   }
@@ -26,7 +26,7 @@ export default class Pins extends Component {
     return (
       <>
       <div>
-        <h1>Pins</h1>
+        <h1>My Pins</h1>
         {renderPins()}
       </div>
       </>

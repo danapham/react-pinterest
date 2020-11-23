@@ -3,11 +3,13 @@ import axios from 'axios';
 
 const baseUrl = 'https://pinterest-77df5.firebaseio.com';
 
-const getPins = () => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/pins.json`).then((res) => {
+const getPublicPins = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json?orderBy="private"&equalTo=false`).then((res) => {
     const pinsObj = res.data;
     resolve(Object.values(pinsObj));
   }).catch((err) => reject(err));
 });
 
-export default { getPins };
+// const getUserPins = () =>
+
+export default { getPublicPins };
