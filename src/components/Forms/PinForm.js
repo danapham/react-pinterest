@@ -1,17 +1,16 @@
-/* eslint-disable max-len */
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
-import 'firebase/storage';
+import pinData from '../../helpers/data/pinData';
 import getUid from '../../helpers/data/authData';
-import boardsData from '../../helpers/data/boardsData';
 
-export default class BoardForm extends Component {
+export default class PinForm extends Component {
   state = {
-    firebaseKey: this.props.board?.firebaseKey || '',
-    name: this.props.board?.name || '',
-    imageUrl: this.props.board?.imageUrl || '',
-    description: this.props.board?.description || '',
-    userId: this.props.board?.userId || '',
+    firebaseKey: this.props.pin?.firebaseKey || '',
+    name: this.props.pin?.name || '',
+    imageUrl: this.props.pin?.imageUrl || '',
+    description: this.props.pin?.description || '',
+    userId: this.props.pin?.userId || '',
+    private: this.props.pin?.private || '',
   }
 
   componentDidMount() {
@@ -43,14 +42,14 @@ export default class BoardForm extends Component {
     e.preventDefault();
 
     if (this.state.firebaseKey === '') {
-      boardsData.createBoard(this.state)
+      pinData.createPin(this.state)
         .then(() => {
           this.props.onUpdate();
         });
     } else {
-      boardsData.updateBoard(this.state.firebaseKey, this.state)
+      pinData.updateBoard(this.state.firebaseKey, this.state)
         .then(() => {
-          this.props.onUpdate(this.props.board.firebaseKey);
+          this.props.onUpdate(this.props.pin.firebaseKey);
         });
     }
   }
@@ -58,13 +57,13 @@ export default class BoardForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>Board Form</h1>
+        <h1>Pin Form</h1>
         <input
           type='text'
           name='name'
           value={this.state.name}
           onChange={this.handleChange}
-          placeholder='Board Name'
+          placeholder='Pin Name'
           className='form-control form-control-lg m-1'
           required
         />
@@ -73,7 +72,7 @@ export default class BoardForm extends Component {
           name='description'
           value={this.state.description}
           onChange={this.handleChange}
-          placeholder='Board Description'
+          placeholder='Pin Description'
           className='form-control form-control-lg m-1'
           required
         />

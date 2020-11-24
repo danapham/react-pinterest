@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Pin from '../components/Pin';
 import pinData from '../helpers/data/pinData';
 import getUid from '../helpers/data/authData';
+import PinForm from '../components/Forms/PinForm';
 
 export default class Pins extends Component {
   state = {
@@ -29,6 +30,7 @@ export default class Pins extends Component {
       <>
       <div>
         <h1>My Pins</h1>
+        <PinForm onUpdate={this.getPins} />
         {renderPins()}
       </div>
       </>

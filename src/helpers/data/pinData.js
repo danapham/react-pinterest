@@ -21,4 +21,9 @@ const getUserPins = (uid) => new Promise((resolve, reject) => {
   });
 });
 
-export default { getPublicPins, getUserPins };
+const createPin = (data) => axios.post(`${baseUrl}/pins.json`, data).then((res) => {
+  const fbKey = { firebaseKey: res.data.name };
+  axios.patch(`${baseUrl}/pins/${res.data.name}.json`, fbKey);
+}).catch((err) => console.warn(err));
+
+export default { getPublicPins, getUserPins, createPin };
