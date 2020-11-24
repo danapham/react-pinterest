@@ -31,6 +31,10 @@ export default class PinForm extends Component {
           this.setState({ imageUrl });
         });
       });
+    } else if (e.target.name === 'private') {
+      this.setState({
+        private: e.target.checked,
+      });
     } else {
       this.setState({
         [e.target.name]: e.target.value,
