@@ -86,6 +86,13 @@ export default class PinForm extends Component {
           required
         />
         <input
+          type='checkbox'
+          name='private'
+          value={this.state.private}
+          onChange={this.handleChange}
+        />
+        <label for='private'>Make pin private</label>
+        <input
           className='m-2'
           type='file'
           id='myFile'
