@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
 
-const baseUrl = 'https://pinterest-77df5.firebaseio.com/';
+const baseUrl = 'https://pinterest-77df5.firebaseio.com';
 
 const getBoardPins = (boardId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins-boards.json?orderBy="boardId"&equalTo="${boardId}"`).then((response) => {
@@ -22,4 +22,11 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { getBoardPins, getPin };
+const deleteBoardPins = (boardId) => axios.get(`${baseUrl}/pins-boards.json?orderBy="boardId"&equalTo="${boardId}"`).then((res) => {
+  const pinKeys = Object.keys(res.data);
+  console.log(res.data);
+  console.log(pinKeys);
+  pinKeys.forEach((fbKey) => axios.delete(`${baseUrl}/pins-boards/${fbKey}.json`));
+});
+
+export default { getBoardPins, getPin, deleteBoardPins };

@@ -4,6 +4,7 @@ import Board from '../components/Board';
 import BoardForm from '../components/Forms/BoardForm';
 import getUid from '../helpers/data/authData';
 import AppModal from '../components/AppModal';
+import boardPinsData from '../helpers/data/boardPinsData';
 
 export default class Boards extends React.Component {
   state = {
@@ -28,6 +29,7 @@ export default class Boards extends React.Component {
   deleteBoard = (e) => {
     const fbKey = e.target.id;
     boardsData.deleteBoard(fbKey);
+    boardPinsData.deleteBoardPins(fbKey);
     this.getBoards();
   };
 
