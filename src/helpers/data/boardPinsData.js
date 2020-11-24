@@ -24,8 +24,6 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
 
 const deleteBoardPins = (boardId) => axios.get(`${baseUrl}/pins-boards.json?orderBy="boardId"&equalTo="${boardId}"`).then((res) => {
   const pinKeys = Object.keys(res.data);
-  console.log(res.data);
-  console.log(pinKeys);
   pinKeys.forEach((fbKey) => axios.delete(`${baseUrl}/pins-boards/${fbKey}.json`));
 });
 
