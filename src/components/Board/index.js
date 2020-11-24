@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import boardsData from '../../helpers/data/boardsData';
 
 class Boards extends Component {
   render() {
