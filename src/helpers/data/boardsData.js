@@ -30,6 +30,8 @@ const createBoard = (data) => axios.post(`${baseUrl}/boards.json`, data)
 
 const updateBoard = (fbKey, data) => axios.patch(`${baseUrl}/boards/${fbKey}.json`, data);
 
+const deleteBoard = (fbKey) => axios.delete(`${baseUrl}/boards/${fbKey}.json`);
+
 export default {
-  getAllBoards, createBoard, updateBoard, getSingleBoard,
+  getAllBoards, createBoard, updateBoard, getSingleBoard, deleteBoard,
 };
