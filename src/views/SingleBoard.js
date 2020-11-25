@@ -21,18 +21,18 @@ export default class SingleBoard extends React.Component {
     this.setPins(boardFirebaseKey);
   }
 
-  getBoardPins = (fbKey) => {
+  getPins = (fbKey) => (
     boardPinsData.getBoardPins(fbKey).then((res) => {
       const boardPins = [];
       res.forEach((pin) => {
         boardPins.push(boardPinsData.getPin(pin.pinId));
       });
       return Promise.all([...boardPins]);
-    });
-  }
+    })
+  )
 
   setPins = (fbKey) => {
-    boardPinsData.getBoardPins(fbKey).then((res) => this.setState({
+    this.getPins(fbKey).then((res) => this.setState({
       pins: res,
     }));
   }

@@ -27,4 +27,8 @@ const deleteBoardPins = (boardId) => axios.get(`${baseUrl}/pins-boards.json?orde
   pinKeys.forEach((fbKey) => axios.delete(`${baseUrl}/pins-boards/${fbKey}.json`));
 });
 
-export default { getBoardPins, getPin, deleteBoardPins };
+const createBoardPin = (data) => axios.post(`${baseUrl}/pins-boards.json`, data);
+
+export default {
+  getBoardPins, getPin, deleteBoardPins, createBoardPin,
+};
