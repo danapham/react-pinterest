@@ -4,6 +4,7 @@ import BoardForm from '../components/Forms/BoardForm';
 import boardsData from '../helpers/data/boardsData';
 import Pin from '../components/Pin';
 import AppModal from '../components/AppModal';
+import pinData from '../helpers/data/pinData';
 
 export default class SingleBoard extends React.Component {
   state = {
@@ -21,18 +22,18 @@ export default class SingleBoard extends React.Component {
     this.setPins(boardFirebaseKey);
   }
 
-  getBoardPins = (fbKey) => {
+  getPins = (fbKey) => (
     boardPinsData.getBoardPins(fbKey).then((res) => {
       const boardPins = [];
       res.forEach((pin) => {
         boardPins.push(boardPinsData.getPin(pin.pinId));
       });
       return Promise.all([...boardPins]);
-    });
-  }
+    })
+  )
 
   setPins = (fbKey) => {
-    boardPinsData.getBoardPins(fbKey).then((res) => this.setState({
+    this.getPins(fbKey).then((res) => this.setState({
       pins: res,
     }));
   }
