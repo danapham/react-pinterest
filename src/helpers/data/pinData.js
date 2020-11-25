@@ -26,4 +26,15 @@ const createPin = (data) => axios.post(`${baseUrl}/pins.json`, data).then((res) 
   axios.patch(`${baseUrl}/pins/${res.data.name}.json`, fbKey);
 }).catch((err) => console.warn(err));
 
-export default { getPublicPins, getUserPins, createPin };
+const getSinglePin = (pinId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json?orderBy="firebaseKey"&equalTo="${pinId}"`).then((res) => {
+    const pinArray = Object.values(res.data);
+    resolve(pinArray[0]);
+  }).catch((err) => reject(err));
+});
+
+const updatePin = (pinId, data) => axios.patch(`${baseUrl}/pins/${pinId}.json`, data);
+
+export default {
+  getPublicPins, getUserPins, createPin, getSinglePin, updatePin,
+};

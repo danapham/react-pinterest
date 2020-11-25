@@ -51,7 +51,7 @@ export default class PinForm extends Component {
           this.props.onUpdate();
         });
     } else {
-      pinData.updateBoard(this.state.firebaseKey, this.state)
+      pinData.updatePin(this.state.firebaseKey, this.state)
         .then(() => {
           this.props.onUpdate(this.props.pin.firebaseKey);
         });
@@ -95,7 +95,7 @@ export default class PinForm extends Component {
           value={this.state.private}
           onChange={this.handleChange}
         />
-        <label for='private'>Make pin private</label>
+        <label htmlFor='private'>Make pin private</label>
         <input
           className='m-2'
           type='file'
