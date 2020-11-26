@@ -19,20 +19,21 @@ export default class Home extends Component {
     }));
   }
 
+  loadComponent = () => {
+    let component = '';
+    if (this.props.authed) {
+      component = this.state.pins.map((pin) => (<Pin key={pin.firebaseKey} pin={pin} />));
+    } else {
+      component = <Auth />;
+    }
+    return component;
+  };
+
   render() {
-    const loadComponent = () => {
-      let component = '';
-      if (this.props.authed) {
-        component = this.state.pins.map((pin) => (<Pin pin={pin} />));
-      } else {
-        component = <Auth />;
-      }
-      return component;
-    };
     return (
       <div>
         <h1>Welcome to Pinterest!</h1>
-        {loadComponent()}
+        {this.loadComponent()}
       </div>
     );
   }
