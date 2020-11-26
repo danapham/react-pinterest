@@ -13,7 +13,7 @@ import SearchResults from '../views/SearchResults';
 export default function Routes({ authed }) {
   return (
           <Switch>
-            <Route exact path='/home' component={() => <Home authed={authed} />} />
+            <Route exact path='/' component={() => <Home authed={authed} />} />
             <Route exact path='/boardform' component={() => <BoardForm authed={authed} />} />
             <Route exact path='/boards/' component={() => <Boards authed={authed} />} />
             <Route exact path='/pindetails/:id' component={(props) => <PinDetails authed={authed} {...props} />} />
