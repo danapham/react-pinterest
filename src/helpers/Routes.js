@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../views/Home';
 import BoardForm from '../views/BoardForm';
 import Boards from '../views/Boards';
@@ -15,13 +15,21 @@ export default function Routes({ authed }) {
           <Switch>
             <Route exact path='/' component={() => <Home authed={authed} />} />
             <Route exact path='/boardform' component={() => <BoardForm authed={authed} />} />
-            <Route exact path='/boards/' component={() => <Boards authed={authed} />} />
+            <PrivateRoute exact path='/boards/' component={Boards} user={authed} />
             <Route exact path='/pindetails/:id' component={(props) => <PinDetails authed={authed} {...props} />} />
             <Route exact path='/pinform' component={() => <PinForm authed={authed} />} />
-            <Route exact path='/pins' component={(props) => <Pins authed={authed} {...props} />} />
+            <PrivateRoute exact path='/pins' component={Pins} user={authed} />
             <Route exact path='/boards/:id' component={(props) => <SingleBoard authed={authed} {...props} />} />
             <Route exact path='/notfound' component={() => <NotFound />} />
             <Route exact path='/search/:term/:type' component={(props) => <SearchResults {...props} />} />
           </Switch>
   );
 }
+
+const PrivateRoute = ({ component: Component, user, ...rest }) => {
+  const routeChecker = (taco) => (user
+    ? (<Component {...taco} user={user} />)
+    : (<Redirect to={{ pathname: '/', state: { from: taco.location } }} />));
+
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
