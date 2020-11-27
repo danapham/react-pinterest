@@ -44,13 +44,14 @@ export default class SingleBoard extends React.Component {
   }
 
   renderPins = () => (
-    this.state.pins.map((pin) => <Pin key={pin.pinId} pin={pin} />)
+    this.state.pins.map((pin) => <Pin key={pin.firebaseKey} pin={pin} />)
   )
 
   render() {
     return (
       <div>
         <h1>{this.state.board.name}</h1>
+        <h3>{this.state.board.description}</h3>
         <AppModal title={'Update Board'} buttonLabel={'Update Board'}>
         {Object.keys(this.state.board).length && <BoardForm board={this.state.board} onUpdate={this.getBoard} />}
         </AppModal>

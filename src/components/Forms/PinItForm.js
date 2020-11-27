@@ -18,7 +18,7 @@ export default class PinItForm extends Component {
   }
 
   renderBoards = () => (
-    this.state.boards.map((board) => (<option value={board.firebaseKey}>{board.name}</option>)))
+    this.state.boards.map((board) => (<option key={board.firebaseKey} value={board.firebaseKey}>{board.name}</option>)))
 
   handleChange = (e) => {
     this.setState({
